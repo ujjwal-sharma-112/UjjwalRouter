@@ -1,0 +1,38 @@
+[Unit]
+Description=UjjwalRouter — Free-Only Multi-Provider LLM Router
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ujjwalrouter
+Group=ujjwalrouter
+WorkingDirectory=/opt/ujjwalrouter
+EnvironmentFile=/etc/ujjwalrouter/ujjwalrouter.env
+ExecStart=/usr/bin/node /opt/ujjwalrouter/dist/index.js
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=30
+KillSignal=SIGTERM
+
+# Security hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX AF_NETLINK
+RestrictRealtime=true
+LockPersonality=true
+MemoryDenyWriteExecute=false
+ReadWritePaths=/var/lib/ujjwalrouter
+UMask=0077
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=ujjwalrouter
+
+[Install]
+WantedBy=multi-user.target

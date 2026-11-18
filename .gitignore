@@ -1,0 +1,15 @@
+node_modules/
+dist/
+apps/dashboard/dist/
+apps/dashboard/node_modules/
+data/
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+.env
+.env.local
+backups/
+coverage/
+*.log
+.DS_Store
